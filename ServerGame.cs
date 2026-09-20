@@ -13,7 +13,7 @@ public class ServerGame
     public ConcurrentDictionary<long, ServerPlayer> ServerPlayers { get; } = new();
     public ReplicatedGameData ReplicatedGameData { get; set; }
     public ConcurrentDictionary<long, ReplicatedGamePlayer> ReplicatedGamePlayers { get; set; } = new();
-    private ZamboniTopology ZamboniTopology { get; set; }
+    public ZamboniTopology ZamboniTopology { get; private set; }
 
     public static async Task<ServerGame> CreateAsync(ServerPlayer creator, CreateGameRequest request, ZamboniTopology zamboniTopology)
     {
