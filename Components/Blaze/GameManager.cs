@@ -257,7 +257,11 @@ internal class GameManager : GameManagerBase.Server
                 }
                 case PlayerNetConnectionStatus.DISCONNECTED:
                 {
-                    serverGame.RemoveGameParticipant(ServerManager.GetServerPlayerByUserId(target), PlayerRemovedReason.PLAYER_CONN_LOST);
+                    var leaver = serverGame.ZamboniTopology == ZamboniTopology.Dedicated
+                        ? serverPlayer : ServerManager.GetServerPlayerByUserId(target);
+                    if (leaver != null)
+                        serverGame.RemoveGameParticipant(leaver, PlayerRemovedReason.PLAYER_CONN_LOST);
+
                     break;
                 }
                 default:
